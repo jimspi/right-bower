@@ -85,6 +85,7 @@ button {
 
 .font-display {
   font-family: var(--font-display), Georgia, serif;
+  font-variant-numeric: lining-nums;
 }
 
 .gold-text {

@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Right Bower
 
-## Getting Started
+A mobile-first, single-player **Euchre** game built as a Progressive Web App. You sit South and play with the computer partner at North against two computer opponents. No backend, no database, no accounts: everything runs on your device and works offline once loaded.
 
-First, run the development server:
+## How to play
+
+- 24-card deck (9–A in four suits), 5 cards each, a 4-card kitty with a turned-up card.
+- **Trump order:** right bower (J of trump) > left bower (J of the same color, which *is* trump) > A, K, Q, 10, 9. Other suits rank A, K, Q, J, 10, 9.
+- **Bidding:** round 1 you may order up the upcard's suit (the dealer picks it up and discards). If all pass, round 2 lets you name any other suit. If all pass again the hand is thrown in. Optional **Stick the Dealer**. Whoever calls trump can **go alone**.
+- **Play:** five tricks, you must follow suit (the left bower counts as trump).
+- **Scoring:** makers take 3–4 tricks = 1, march = 2 (4 if alone), euchred = 2 to the defenders. First to 10 wins.
+
+The in-app **Menu → How to Play** has the full rules.
+
+## Features
+
+- Pure TypeScript game engine (`lib/euchre`) with a reducer/state machine, independent of React.
+- Computer players that bid by hand strength and position, count cards, win cheaply, and avoid trumping their partner.
+- Custom SVG cards, logo, and card back (no copyrighted art); four-color suit option.
+- Saved game, settings, and lifetime record in `localStorage`.
+- Installable PWA with offline support (service worker) and iOS Home Screen metadata.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm test           # engine unit tests + 1,000-game AI simulation
+npm run lint
+npm run type-check
+npm run build && npm start
+npm run icons      # regenerate icons/OG image from public/logo.svg
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js (App Router), TypeScript, Tailwind CSS v4, Framer Motion, Vitest, sharp (icon generation).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project layout
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+lib/euchre/   engine (rules, reducer), AI, tests
+lib/          persistence, haptics/sound, useGame hook
+components/   Game table, cards, sheets (menu/rules/settings)
+public/       logo, icons, manifest, service worker
+scripts/      generate-icons.mjs
+```
