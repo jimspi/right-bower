@@ -256,6 +256,7 @@ export default function Game() {
         {s.dealer === seat && <span className="dealer-chip" title="Dealer">D</span>}
         {s.maker === seat && s.phase !== "bid1" && s.phase !== "bid2" && (
           <span className="chip" style={{ background: "rgba(227,185,78,.2)" }}>
+            {trump && <SuitBadge suit={trump} size={16} fourColor={fourColor} />}
             {s.alone ? "alone" : "maker"}
           </span>
         )}
@@ -569,7 +570,10 @@ export default function Game() {
             </span>
             {s.dealer === 0 && <span className="dealer-chip">D</span>}
             {s.maker === 0 && s.phase !== "bid1" && s.phase !== "bid2" && (
-              <span className="chip" style={{ background: "rgba(227,185,78,.2)" }}>{s.alone ? "alone" : "maker"}</span>
+              <span className="chip" style={{ background: "rgba(227,185,78,.2)" }}>
+                {trump && <SuitBadge suit={trump} size={16} fourColor={fourColor} />}
+                {s.alone ? "alone" : "maker"}
+              </span>
             )}
           </div>
           {s.lastTrick && (
