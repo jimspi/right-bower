@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
   },
   formatDetection: { telephone: false },
-  other: { "mobile-web-app-capable": "yes" },
+  other: { "mobile-web-app-capable": "yes", "apple-mobile-web-app-capable": "yes" },
   openGraph: {
     title: "Right Bower",
     description: DESCRIPTION,
